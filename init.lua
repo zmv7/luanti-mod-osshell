@@ -13,9 +13,9 @@ core.register_on_mods_loaded(function()
 		end
 		core.chat_send_player(name, core.colorize("#999","] "..msg))
 		local cmd = ie.io.popen(msg, "r")
-		local out = cmd:read("*a")
+		local out = tostring(cmd:read("*a")):gsub("[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]", "")
 		cmd:close()
-		core.chat_send_player(name, tostring(out))
+		core.chat_send_player(name, out)
 		return true
 	end)
 end)
